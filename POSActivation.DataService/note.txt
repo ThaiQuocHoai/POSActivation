@@ -1,0 +1,4 @@
+﻿28682
+Scaffold-DbContext "Server=QH\SQLEXPRESS; Database=POSActivationDB; Trusted_Connection = False;User Id=sa;Password=1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f
+
+Scaffold-DbContext "Server=54.151.235.125; Database=POSActivationDB; Trusted_Connection = False;User Id=unilab_posactivationdb;Password=POSActiveationDB_season_spring2021" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f

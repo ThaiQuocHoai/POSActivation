@@ -1,0 +1,237 @@
+﻿<#@ template language="C#" hostspecific="true"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System" #>
+<#@ output extension="cs" #>
+
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetRole : IdentityRole<string>
+    {
+        public AspNetRole()
+        {
+            AspNetRoleClaims = new HashSet<AspNetRoleClaim>();
+            AspNetUserRoles = new HashSet<AspNetUserRole>();
+        }
+
+        public virtual ICollection<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetRole.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetRoleClaim : IdentityRoleClaim<string>
+    {
+
+        public virtual AspNetRole Role { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetRoleClaim.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetUser : IdentityUser<string>
+    {
+      public AspNetUser()
+        {
+            AspNetUserClaims = new HashSet<AspNetUserClaim>();
+            AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            AspNetUserRoles = new HashSet<AspNetUserRole>();
+            AspNetUserTokens = new HashSet<AspNetUserToken>();
+        }
+
+        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
+        public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetUser.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetUserClaim : IdentityUserClaim<string>
+    {
+      public virtual AspNetUser User { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetUserClaim.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetUserLogin : IdentityUserLogin<string>
+    {
+      public virtual AspNetUser User { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetUserLogin.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetUserRole : IdentityUserRole<string>
+    {
+      public virtual AspNetRole Role { get; set; }
+        public virtual AspNetUser User { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetUserRole.cs","Asp");
+#>
+
+/////////////////////////////////////////////////////////////////
+//
+//              AUTO-GENERATED
+//
+/////////////////////////////////////////////////////////////////
+
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace POSActivation.DataService.Models
+{
+    public partial class AspNetUserToken : IdentityUserToken<string>
+    {
+      public virtual AspNetUser User { get; set; }
+    }
+}
+
+
+<#
+  // End of file.
+  SaveOutput("AspNetUserToken.cs","Asp");
+#>
+
+<#
+    DeleteAspNet();
+#>
+
+<#+
+private void SaveOutput(string outputFileName,string folder) {
+  string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+  if(!Directory.Exists(Path.Combine(templateDirectory,folder))) { Directory.CreateDirectory(Path.Combine(templateDirectory,folder)); }
+  string outputFilePath = Path.Combine(templateDirectory,folder, outputFileName);
+  File.WriteAllText(outputFilePath, this.GenerationEnvironment.ToString()); 
+   this.GenerationEnvironment.Clear();
+}
+
+private void DeleteAspNet(){
+    var path = Host.ResolvePath("..\\Models");
+        var files = Directory.GetFiles(path, "*.cs").Select(s => new FileInfo(s).Name);
+
+      string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+      var modelPath=Directory.GetParent(templateDirectory)+@"\Models";
+
+      foreach(string item in files){
+      
+        if(item.StartsWith("AspNet")){
+            string filename = modelPath.ToString()+ @"\\" + item.ToString();
+            File.Delete(filename);
+        }
+            
+      }
+}
+
+#>
